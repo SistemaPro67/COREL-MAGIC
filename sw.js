@@ -1,0 +1,4 @@
+const C="cj-v3",F=["./","index.html","style.css","script.jconst C="cj-v4",F=["./","index.html","style.css","script.js","extras.js","inicio.js","manifest.json","favicon.ico","favicon-32.png","icon-192.png","icon-512.png","apple-touch-icon.png","img/ok.png","img/senala.png","img/piensa.png","img/celebra.png"];
+self.addEventListener("install",e=>{e.waitUntil(caches.open(C).then(c=>Promise.all(F.map(u=>c.add(u).catch(()=>{})))).then(()=>self.skipWaiting()))});
+self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
+self.addEventListener("fetch",e=>{if(e.request.method!=="GET")return;e.respondWith(fetch(e.request).then(r=>{const c=r.clone();caches.open(C).then(x=>x.put(e.request,c)).catch(()=>{});return r}).catch(()=>caches.match(e.request)))});
